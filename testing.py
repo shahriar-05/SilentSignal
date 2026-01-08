@@ -2,13 +2,12 @@ import cv2
 from tensorflow.keras.models import load_model
 import numpy as np
 
-# 1. SETUP: Load resources BEFORE the loop starts
-# This ensures everything is ready before we start capturing frames
+
 face_cascade = cv2.CascadeClassifier(
     cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 )
 
-# Load your pre-trained model
+
 try:
     model = load_model("fer.h5")
     print("Model loaded successfully.")
@@ -16,7 +15,6 @@ except Exception as e:
     print(f"Error: Could not load 'fer.h5'. {e}")
     exit(1)
 
-# Emotion labels and scoring
 emotions = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 emotion_score = {
     'Happy': 80,
@@ -28,7 +26,7 @@ emotion_score = {
     'Disgust': 10
 }
 
-# 2. INITIALIZE CAMERA
+
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Error: Could not open camera.")
